@@ -9,7 +9,6 @@
         return mapValue(value, mapArr[index]);
       });
     };
-
     function mapValue(value, mapType) {
       var newValue;
       switch (mapType) {
