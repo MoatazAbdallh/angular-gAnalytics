@@ -23,11 +23,19 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($rootScope) {
+    function NavbarController($rootScope, $state, CONFIG) {
       var vm = this;
-      $rootScope.$on('CHANGE_TAB_INDEX', function (event,args) {
-        vm.selectedIndex = args.selectedAnalyticItem;
+      vm.selectTab = selectTab;
+      $rootScope.$on('CHANGE_TAB_INDEX', function (event, args) {
+        vm.selectedIndex = args.selectedAnalyticItemIndex;
       });
+
+      function selectTab(index) {
+        var selectedAnalyticsItem = CONFIG.analyticsItems[index];
+        $state.go(selectedAnalyticsItem.state, {
+          id: selectedAnalyticsItem.id
+        });
+      }
     }
   }
 
