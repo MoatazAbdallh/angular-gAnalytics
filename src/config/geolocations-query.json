@@ -1,0 +1,24 @@
+{
+  "dates": {
+    "start-date": "30daysAgo",
+    "end-date": "yesterday"
+  },
+  "queries": [
+    {
+      "request_id": "GEOLOCATIONS",
+      "dimensions": "ga:country",
+      "metrics": "ga:sessions,ga:users",
+      "mapping": [
+        "string",
+        "number",
+        "number"
+      ],
+      "views":["Chart","Grid"],
+      "chartOptions": {
+        "title": "Sessions / Users"
+      },
+      "chartTypes":["google.visualization.GeoChart"],
+      "chartContainers":[".geochart"]
+    }
+  ]
+}

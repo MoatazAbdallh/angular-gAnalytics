@@ -1,0 +1,39 @@
+{
+  "analyticsItems": [
+    {
+      "label": "Dashboard",
+      "url": "/dashboard"
+    },
+    {
+      "id":"sessions-users",
+      "label": "Users/Sessions",
+      "url": "/analytics/sessions-users",
+      "state":"home.dynamic-analytics",
+      "views":["Grid","Chart"],
+      "query_file":"config/sessions-users-query.json"
+    },
+    {
+      "id":"geolocations",
+      "label": "Geolocations",
+      "url": "/analytics/gelocations",
+      "state":"home.dynamic-analytics",
+      "views":["Chart","Grid"],
+      "query_file":"config/geolocations-query.json"
+    },
+    {
+      "label": "Device Info",
+      "url": "/device"
+    },
+
+    {
+      "label": "Reciters",
+      "url": "/reciters"
+    },
+    {
+      "label": "Sura",
+      "url": "/sura"
+    }
+  ],
+  "serverUrl":"http://localhost:8080/",
+  "propertyId":"ga:113910487"
+}
