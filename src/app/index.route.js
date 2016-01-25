@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -20,14 +20,17 @@
         controller: 'DashboardController',
         controllerAs: 'vm'
       })
-      .state('home.sessions-users', {
-        url: '/sessions-users',
+      .state('home.dynamic-analytics', {
+        url: '/analytics/:id',
         templateUrl: 'app/states/sessions-users/sessions-users.html',
         controller: 'SessionsUsersController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        params: {
+          id: null
+        }
       })
 
-    $urlRouterProvider.otherwise('/sessions-users');
+    $urlRouterProvider.otherwise('/analytics/sessions-users');
   }
 
 })();

@@ -6,7 +6,7 @@
     .controller('SessionsUsersController', SessionsUsersController);
 
   /** @ngInject */
-  function SessionsUsersController($http, $mdDialog, $rootScope, $mdToast, CONFIG, DATATYPE_MAPPER, SESSIONS_USERS_QUERY, moment, mapper, gCharts) {
+  function SessionsUsersController($http, $mdDialog, $rootScope, $mdToast, CONFIG, analyticsQuery, moment, mapper, gCharts) {
     var vm = this;
     vm.disableRequest = true;
     vm.label = "Sessions / Users";
@@ -17,21 +17,26 @@
     vm.requestAnalytics = requestAnalytics;
     vm.checkDateValidity = checkDateValidity;
     vm.onPaginate = onPaginate;
-    google.charts.load('current', {'packages': ['line', 'bar', 'corechart']});
 
     vm.queryGrid = {
       order: 'name',
       limit: 5,
-      page: 1
+      page: 1,
+      options: [20, 40, 60, 80, 100]
     };
 
     $rootScope.$on('CHANGE_TAB_INDEX', function (event, args) {
-      vm.views = CONFIG.analyticsItems[args.selectedAnalyticItem].views;
+      vm.selectedAnalyticsItem = CONFIG.analyticsItems[args.selectedAnalyticItemIndex];
+      vm.views = CONFIG.analyticsItems[args.selectedAnalyticItemIndex].views;
       vm.selectedView = vm.views[0];
+      //Getting Query Json for this analytic Item
+      $http.get(CONFIG.analyticsItems[args.selectedAnalyticItemIndex].query_file).then(function (result) {
+        analyticsQuery.setQuery(result.data);
+        //Initialize
+        requestAnalytics();
+      });
     });
 
-    //Initialize
-    requestAnalytics();
 
     function checkDateValidity() {
       if (!(vm.startDate && vm.endDate))
@@ -48,13 +53,15 @@
 
     function requestAnalytics() {
       vm.disableRequest = true;
-      if (vm.startDate)
-        SESSIONS_USERS_QUERY.dates["start-date"] = moment(vm.startDate).format("YYYY-MM-DD");
-      if (vm.endDate)
-        SESSIONS_USERS_QUERY.dates["end-date"] = moment(vm.endDate).format("YYYY-MM-DD");
+      var ANALYTICS_QUERY = analyticsQuery.getQuery();
 
-      SESSIONS_USERS_QUERY.queries.map(function (query) {
-        query = angular.extend(query, SESSIONS_USERS_QUERY.dates);
+      if (vm.startDate)
+        ANALYTICS_QUERY.dates["start-date"] = moment(vm.startDate).format("YYYY-MM-DD");
+      if (vm.endDate)
+        ANALYTICS_QUERY.dates["end-date"] = moment(vm.endDate).format("YYYY-MM-DD");
+
+      ANALYTICS_QUERY.queries.map(function (query) {
+        query = angular.extend(query, ANALYTICS_QUERY.dates);
         query = angular.extend(query, {"ids": CONFIG.propertyId})
       });
       vm.promise = $http({
@@ -63,7 +70,7 @@
         headers: {
           "Content-Type": "application/json"
         },
-        data: SESSIONS_USERS_QUERY.queries
+        data: ANALYTICS_QUERY.queries
       }).then(function (result) {
         if (result.data.errorCode == 0) {
           vm.loading = false;
@@ -72,13 +79,17 @@
           vm.analyticsData = []; //Array of received data
           _.each(result.data.data, function (analyticobj, index) {
             if (analyticobj.errorCode == 0) {
-              var queryItem = _.find(SESSIONS_USERS_QUERY.queries, function (item) {
+              var queryItem = _.find(ANALYTICS_QUERY.queries, function (item) {
                 return item.request_id == analyticobj.data.request_id;
               });
               //mapping
               analyticobj.data.rows = _.map(analyticobj.data.rows, function (row) {
                 return mapper.mapValueTypes(row, queryItem.mapping);
               });
+              //Analytics Data for grid view
+              if (queryItem.request_id == "SESSIONS_USERS_DATE") {
+                vm.gridAnalyticsData = angular.extend({}, analyticobj.data);
+              }
               vm.analyticsData.push(analyticobj.data);
             }
           });
@@ -86,6 +97,7 @@
             google.charts.setOnLoadCallback(drawChart);
         }
       }, function (result) {
+        vm.loading = false;
         $mdDialog.show(
           $mdDialog.alert({
             title: 'Warning',
@@ -97,11 +109,12 @@
     }
 
     function drawChart() {
+      var ANALYTICS_QUERY = analyticsQuery.getQuery();
       var chartObj = {};
       var chartArr = [];
       _.each(vm.analyticsData, function (analyticsObj) {
         var data = new google.visualization.DataTable();
-        var queryItem = _.find(SESSIONS_USERS_QUERY.queries, function (item) {
+        var queryItem = _.find(ANALYTICS_QUERY.queries, function (item) {
           return item.request_id == analyticsObj.request_id;
         });
         //Setting DataTable Headers

@@ -12,7 +12,8 @@
           </md-card-header-text>
         </md-card-header>
       </div>
-      <div class="report-tools" flex="50" layout="row" layout-sm="column" layout-xs="column" layout-padding layout-wrap  flex-xs="50" flex-offset-xs="20">
+      <div class="report-tools" flex="50" layout="row" layout-sm="column" layout-xs="column" layout-padding layout-wrap
+           flex-xs="50" flex-offset-xs="20">
         <md-datepicker ng-model="vm.startDate" md-min-date="vm.minDate" md-max-date="vm.maxDate"
                        md-placeholder="Start Date"></md-datepicker>
         <md-datepicker ng-model="vm.endDate" md-max-date="vm.maxDate" md-placeholder="End Date"></md-datepicker>
@@ -28,7 +29,7 @@
         </md-button>
       </div>
     </div>
-    <md-card-content  flex-xs="50" flex-offset-xs="20">
+    <md-card-content flex-xs="50" flex-offset-xs="20">
       <div ng-if="vm.selectedView=='Grid'">
         <md-toolbar hide-xs class="md-table-toolbar md-default" ng-if="!vm.showFilter">
           <div class="md-toolbar-tools">
@@ -50,18 +51,18 @@
           </div>
         </md-toolbar>
         <md-table-container>
-          <table md-table  ng-model="vm.selectedRow" md-progress="vm.promise">
+          <table md-table ng-model="vm.selectedRow" md-progress="vm.promise">
             <thead md-head>
             <tr md-row>
-              <th md-column md-order-by ng-repeat="columnHeader in vm.analyticsData[0].columnHeaders">
+              <th md-column md-order-by ng-repeat="columnHeader in vm.gridAnalyticsData.columnHeaders">
                 {{(columnHeader.name.split(':')[1]).toUpperCase()}}
               </th>
             </tr>
             </thead>
             <tbody md-body>
-            <tr md-row md-select="row" md-select-id="{{row[0]}}" md-auto-select ng-repeat="row in vm.analyticsData[0].rows
+            <tr md-row md-select="row" md-select-id="{{row[0]}}" md-auto-select ng-repeat="row in vm.gridAnalyticsData.rows
             | filter: vm.queryGrid.search | orderBy: vm.queryGrid.order | limitTo: vm.queryGrid.limit : (vm.queryGrid.page -1) * vm.queryGrid.limit">
-              <td md-cell>{{row[0]}}</td>
+              <td md-cell>{{row[0] | dateFilter:'DD-MM-YYYY'}}</td>
               <td md-cell>{{row[1]}}</td>
               <td md-cell>{{row[2]}}</td>
             </tr>
@@ -69,18 +70,23 @@
           </table>
         </md-table-container>
 
-        <md-table-pagination md-limit="vm.queryGrid.limit" md-page="vm.queryGrid.page"
-                             md-total="{{vm.analyticsData[0].rows.length}}" md-on-paginate="vm.onPaginate"
+        <md-table-pagination md-limit="vm.queryGrid.limit" md-page="vm.queryGrid.page" md-options="vm.queryGrid.options"
+                             md-total="{{vm.gridAnalyticsData.rows.length}}" md-on-paginate="vm.onPaginate"
                              md-page-select></md-table-pagination>
       </div>
 
-      <div ng-if="vm.selectedView=='Chart'" class="analyticssessions-users-charts">
+      <div ng-if="vm.selectedView=='Chart' && vm.selectedAnalyticsItem.id=='sessions-users'"
+           class="analyticssessions-users-charts">
         <div class="linechart_material"></div>
         <div class="columnchart_material"></div>
         <div class="pie-charts" layout="row" layout-sm="column" layout-xs="column">
           <div flex="50" class="donutchart1"></div>
           <div flex="50" class="donutchart2"></div>
         </div>
+      </div>
+      <div ng-if="vm.selectedView=='Chart' && vm.selectedAnalyticsItem.id=='geolocations'"
+           class="analyticssessions-users-charts">
+        <div class="geochart"></div>
       </div>
     </md-card-content>
   </md-card>

@@ -6,7 +6,7 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, $rootScope, $timeout, CONFIG) {
+  function runBlock($log, $rootScope, $timeout, $http, CONFIG) {
     $log.debug('runBlock end');
     //Safe Apply to avoid run the ordinary apply in current digest cycle
     $rootScope.safeApply = function (fn) {
@@ -20,11 +20,12 @@
       }
     }
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-      var selectedAnalyticItem = _.findIndex(CONFIG.analyticsItems,function(item){
-        return toState.url.indexOf(item.url)>-1
+      var selectedAnalyticItemIndex = _.findIndex(CONFIG.analyticsItems,function(item){
+        return toParams.id.indexOf(item.id)>-1
       });
+
       $timeout(function(){
-        $rootScope.$broadcast('CHANGE_TAB_INDEX',{selectedAnalyticItem:selectedAnalyticItem});
+        $rootScope.$broadcast('CHANGE_TAB_INDEX',{selectedAnalyticItemIndex:selectedAnalyticItemIndex});
       },500);
     });
   }
