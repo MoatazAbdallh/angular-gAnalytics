@@ -20,6 +20,9 @@
         case "google.visualization.GeoChart":
           return new google.visualization.GeoChart(chartContainer);
           break;
+        case "google.visualization.LineChart":
+          return new google.visualization.LineChart(chartContainer);
+          break;
       }
     }
   }
