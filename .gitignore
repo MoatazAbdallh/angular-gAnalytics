@@ -7,3 +7,5 @@ coverage/
 dist/
 .editorconfig
 *.pem
+gulp/ftp-credentials.js
+server/logs
