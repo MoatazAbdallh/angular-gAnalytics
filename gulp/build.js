@@ -3,16 +3,19 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var ftp = require("vinyl-ftp");
 
 var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del', 'run-sequence']
 });
+var minifyCondition = process.argv.join().indexOf('minify') > 0 ? true : false;
+console.log("Minify: " + minifyCondition);
 
 gulp.task('partials', function () {
   return gulp.src([
-    path.join(conf.paths.src, '/app/**/*.html'),
-    path.join(conf.paths.tmp, '/serve/app/**/*.html')
-  ])
+      path.join(conf.paths.src, '/app/**/*.html'),
+      path.join(conf.paths.tmp, '/serve/app/**/*.html')
+    ])
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -26,16 +29,16 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), { read: false });
+  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), {read: false});
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
     ignorePath: path.join(conf.paths.tmp, '/partials'),
     addRootSlash: false
   };
 
-  var htmlFilter = $.filter('*.html', { restore: true });
-  var jsFilter = $.filter('**/*.js', { restore: true });
-  var cssFilter = $.filter('**/*.css', { restore: true });
+  var htmlFilter = $.filter('*.html', {restore: true});
+  var jsFilter = $.filter('**/*.js', {restore: true});
+  var cssFilter = $.filter('**/*.css', {restore: true});
   var assets;
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
@@ -45,14 +48,14 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(jsFilter)
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
-    .pipe($.sourcemaps.write('maps'))
+    .pipe($.if(minifyCondition, $.uglify({preserveComments: $.uglifySaveLicense})).on('error', conf.errorHandler('Uglify')))
+    //.pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.sourcemaps.init())
     .pipe($.replace('../../bower_components/material-design-iconfont/iconfont/', '../fonts/'))
-    .pipe($.minifyCss({ processImport: false }))
-    .pipe($.sourcemaps.write('maps'))
+    .pipe($.if(minifyCondition, $.minifyCss({processImport: false})))
+    //.pipe($.sourcemaps.write('maps'))
     .pipe(cssFilter.restore)
     .pipe(assets.restore())
     .pipe($.useref())
@@ -66,8 +69,8 @@ gulp.task('html', ['inject', 'partials'], function () {
     }))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
-    .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
-  });
+    .pipe($.size({title: path.join(conf.paths.dist, '/'), showFiles: true}));
+});
 
 // Only applies for fonts from bower dependencies
 // Custom fonts are handled by the "other" task
@@ -84,9 +87,9 @@ gulp.task('other', function () {
   });
 
   return gulp.src([
-    path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
-  ])
+      path.join(conf.paths.src, '/**/*'),
+      path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+    ])
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
@@ -95,4 +98,13 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('ftp', function () {
+  var connSettings = require("./ftp-credentials");
+  var conn = ftp.create(connSettings.ftpCredentials);
+  return gulp.src(path.join(conf.paths.dist,'/**'), { buffer: false})
+    .pipe(conn.dest(connSettings.ftpDist));
+});
+
+gulp.task('build', $.runSequence('clean', 'html', 'fonts', 'other'));
+
+gulp.task('build:ftp', $.runSequence('clean', 'html', 'fonts', 'other', 'ftp'))
