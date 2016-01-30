@@ -22,13 +22,14 @@
       })
       .state('home.dynamic-analytics', {
         url: '/analytics/:id',
-        templateUrl: 'app/states/sessions-users/sessions-users.html',
-        controller: 'SessionsUsersController',
+        templateUrl: 'app/states/analytics/analytics.html',
+        controller: 'AnalyticsController',
         controllerAs: 'vm',
         params: {
           id: null
         }
-      })
+      });
+
 
     $urlRouterProvider.otherwise('/analytics/sessions-users');
   }
