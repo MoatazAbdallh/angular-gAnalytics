@@ -23,7 +23,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($rootScope, $state, CONFIG) {
+    function NavbarController($rootScope, $state, $mdDialog, CONFIG) {
       var vm = this;
       vm.selectTab = selectTab;
       $rootScope.$on('CHANGE_TAB_INDEX', function (event, args) {
@@ -32,9 +32,18 @@
 
       function selectTab(index) {
         var selectedAnalyticsItem = CONFIG.analyticsItems[index];
-        $state.go(selectedAnalyticsItem.state, {
-          id: selectedAnalyticsItem.id
-        });
+        if (selectedAnalyticsItem.disabled)
+          $mdDialog.show(
+            $mdDialog.alert({
+              title: 'Warning',
+              textContent: "This feature not activated now, please try again later",
+              ok: 'Close'
+            })
+          );
+        else
+          $state.go(selectedAnalyticsItem.state, {
+            id: selectedAnalyticsItem.id
+          });
       }
     }
   }
