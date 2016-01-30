@@ -1,10 +1,6 @@
 {
   "analyticsItems": [
     {
-      "label": "Dashboard",
-      "url": "/dashboard"
-    },
-    {
       "id":"sessions-users",
       "label": "Users/Sessions",
       "url": "/analytics/sessions-users",
@@ -21,19 +17,59 @@
       "query_file":"config/geolocations-query.json"
     },
     {
-      "label": "Device Info",
-      "url": "/device"
+      "id":"devices",
+      "label": "Devices Info",
+      "url": "/analytics/devices",
+      "state":"home.dynamic-analytics",
+      "views":["Grid","Chart"],
+      "query_file":"config/devices-query.json"
     },
-
     {
-      "label": "Reciters",
-      "url": "/reciters"
+      "id": "reciters-sura",
+      "label": "Reciters / Sura",
+      "url": "/analytics/reciters-sura",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/reciters-sura-query.json"
     },
     {
-      "label": "Sura",
-      "url": "/sura"
+      "id": "mushaf",
+      "label": "Mushaf",
+      "url": "/analytics/mushaf",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/mushaf-query.json"
+    },
+    {
+      "id": "language",
+      "label": "Language Selection / TV Lang",
+      "url": "/analytics/language",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/language-query.json"
+    },
+    {
+      "id": "bookmark",
+      "label": "Bookmark",
+      "url": "/analytics/bookmark",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/bookmark-query.json"
     }
+
   ],
   "serverUrl":"http://localhost:8080/",
-  "propertyId":"ga:113910487"
+  "propertyId":"GOOGLE PROPERTY ID EX: ga:123456"
 }

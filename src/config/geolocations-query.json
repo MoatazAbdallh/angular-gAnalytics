@@ -6,6 +6,7 @@
   "queries": [
     {
       "request_id": "GEOLOCATIONS",
+      "label":"GeoLocation",
       "dimensions": "ga:country",
       "metrics": "ga:sessions,ga:users",
       "mapping": [
@@ -13,10 +14,7 @@
         "number",
         "number"
       ],
-      "views":["Chart","Grid"],
-      "chartOptions": {
-        "title": "Sessions / Users"
-      },
+      "views":["Grid","Chart"],
       "chartTypes":["google.visualization.GeoChart"],
       "chartContainers":[".geochart"]
     }

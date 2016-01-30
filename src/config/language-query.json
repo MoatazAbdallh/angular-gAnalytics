@@ -1,0 +1,54 @@
+{
+  "dates": {
+    "start-date": "30daysAgo",
+    "end-date": "yesterday"
+  },
+  "queries": [
+    {
+      "request_id": "EVENTS_Category_Label_Language",
+      "label":"Language Selection",
+      "dimensions": "ga:eventLabel",
+      "metrics": "ga:totalEvents",
+      "mapping": [
+        "string",
+        "number"
+      ],
+      "filters":"ga:eventCategory=@Language",
+      "views":["Grid","Chart"],
+      "chartOptions":{
+        "title": "Language Selection",
+        "curveType": "function",
+        "legend": {
+          "position": "bottom"
+        }
+      },
+      "chartTypes":["google.charts.Bar"],
+      "chartContainers":[".columnchart_material"],
+      "limit":40,
+      "page":1
+    },
+    {
+      "request_id": "EVENTS_Category_Label_TV_Language",
+      "label":"TV Language",
+      "dimensions": "ga:eventLabel",
+      "metrics": "ga:totalEvents",
+      "mapping": [
+        "string",
+        "number"
+      ],
+      "filters":"ga:eventCategory=@TV Language",
+      "views":["Grid","Chart"],
+      "chartOptions":{
+        "title": "Language Selection",
+        "curveType": "function",
+        "legend": {
+          "position": "bottom"
+        }
+      },
+      "chartTypes":["google.charts.Line"],
+      "chartContainers":[".linechart_material"],
+      "limit":40,
+      "page":1
+    }
+  ]
+}
