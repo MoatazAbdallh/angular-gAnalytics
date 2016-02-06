@@ -10,7 +10,7 @@
       this.timeout(5000);
       request({
         method: 'POST',
-        uri: 'http://localhost:8080/get-meterics-dimensions',
+        uri: 'http://glacial-savannah-5405.herokuapp.com/get-meterics-dimensions',
         form: {
           "ids": "ga:113910487",
           "start-date": "30daysAgo",
