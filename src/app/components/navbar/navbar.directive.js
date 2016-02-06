@@ -23,15 +23,29 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($rootScope, $state, $mdDialog, CONFIG) {
+    function NavbarController($rootScope, $state, $mdDialog, $mdSidenav, CONFIG, configService) {
       var vm = this;
       vm.selectTab = selectTab;
+      vm.toggleMenu = toggleMenu;
+      vm.propertiesId = CONFIG.propertiesId;
+      vm.propertyChanged = propertyChanged;
+
       $rootScope.$on('CHANGE_TAB_INDEX', function (event, args) {
         vm.selectedIndex = args.selectedAnalyticItemIndex;
       });
+      function propertyChanged() {
+        configService.setPropertyId(vm.selectedProperty);
+        $rootScope.$broadcast('propertyChanged', {
+          property: vm.selectedProperty
+        });
+      }
+
+      function toggleMenu() {
+        $mdSidenav('left').toggle();
+      }
 
       function selectTab(index) {
-        var selectedAnalyticsItem = CONFIG.analyticsItems[index];
+        var selectedAnalyticsItem = configService.getConfig().analyticsItems[index];
         if (selectedAnalyticsItem.disabled)
           $mdDialog.show(
             $mdDialog.alert({

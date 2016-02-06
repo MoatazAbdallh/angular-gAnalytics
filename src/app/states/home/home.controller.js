@@ -1,11 +1,14 @@
-(function(){
+(function () {
   'use strict';
-  angular.module('gAnalytics').controller('HomeController',HomeController);
+  angular.module('gAnalytics').controller('HomeController', HomeController);
 
   /** @ngInject */
-  function HomeController(CONFIG){
+  function HomeController(CONFIG, CONFIG_QUERIES, $http, configService) {
     var vm = this;
+    vm.selectedProperty = CONFIG.selectedProperty;
     vm.navbar = {};
-    vm.navbar.items = CONFIG.analyticsItems;
+    var configQueries = configService.getConfig() || CONFIG_QUERIES;
+
+    vm.navbar.items = configQueries.analyticsItems;
   }
 })();

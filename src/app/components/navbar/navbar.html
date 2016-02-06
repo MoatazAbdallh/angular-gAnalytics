@@ -1,5 +1,24 @@
-<md-tabs md-selected="vm.selectedIndex" md-border-bottom md-autoselect md-center-tabs>
-  <md-tab ng-repeat="item in ::vm.items" label="{{::item.label}}" ng-click="vm.selectTab($index)"></md-tab>
-</md-tabs>
-
+<div layout="row" layoutsm="column">
+  <div flex="10" flex-sm="100">
+    <md-button class="md-fab md-primary" ng-click="vm.toggleMenu()">
+      <i class="material-icons menu-icon">menu</i>
+    </md-button>
+    <md-sidenav layout-align="center" md-component-id="left" class="md-sidenav-left">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Settings</h1>
+      </md-toolbar>
+      <md-input-container>
+        <label>Project</label>
+        <md-select ng-model="vm.selectedProperty" ng-change="vm.propertyChanged()">
+          <md-optgroup ng-repeat="group in vm.propertiesId" label="{{group.group}}">
+            <md-option ng-value="item" ng-repeat="item in group.items">{{item.label}}</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+    </md-sidenav>
+  </div>
+  <md-tabs flex="90" flex-sm="100" md-selected="vm.selectedIndex" md-border-bottom md-autoselect md-center-tabs>
+    <md-tab ng-repeat="item in ::vm.items" label="{{::item.label}}" ng-click="vm.selectTab($index)"></md-tab>
+  </md-tabs>
+</div>
 

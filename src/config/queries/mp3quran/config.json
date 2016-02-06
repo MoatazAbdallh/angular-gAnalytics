@@ -1,0 +1,81 @@
+{
+  "analyticsItems": [
+    {
+      "id": "sessions-users",
+      "label": "Users/Sessions",
+      "url": "/analytics/sessions-users",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/sessions-users-query.json"
+    },
+    {
+      "id": "geolocations",
+      "label": "Geolocations",
+      "url": "/analytics/gelocations",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Chart",
+        "Grid"
+      ],
+      "query_file": "config/queries/mp3quran/geolocations-query.json"
+    },
+    {
+      "id": "devices",
+      "label": "Devices Info",
+      "url": "/analytics/devices",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/devices-query.json"
+    },
+    {
+      "id": "reciters-sura",
+      "label": "Reciters / Sura",
+      "url": "/analytics/reciters-sura",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/reciters-sura-query.json"
+    },
+    {
+      "id": "mushaf",
+      "label": "Mushaf",
+      "url": "/analytics/mushaf",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/mushaf-query.json"
+    },
+    {
+      "id": "language",
+      "label": "Language Selection / TV Lang",
+      "url": "/analytics/language",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/language-query.json"
+    },
+    {
+      "id": "bookmark",
+      "label": "Bookmark",
+      "url": "/analytics/bookmark",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/mp3quran/bookmark-query.json"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
     .controller('AnalyticsController', AnalyticsController);
 
   /** @ngInject */
-  function AnalyticsController($http, $mdDialog, $rootScope, $mdToast, CONFIG, analyticsQuery, moment, mapper, gCharts) {
+  function AnalyticsController($http, $mdDialog, $rootScope, $mdToast, CONFIG, configService, analyticsQuery, moment, mapper, gCharts) {
     var vm = this;
     vm.disableRequest = true;
     vm.maxDate = new Date();
@@ -17,7 +17,7 @@
     vm.checkDateValidity = checkDateValidity;
     vm.onPaginate = onPaginate;
     vm.orderGrid = orderGrid;
-    vm.ordering = {}
+    vm.ordering = {};
     vm.ordering.index = 0;
     vm.ordering.status = 'ascending';
 
@@ -29,17 +29,19 @@
     };
 
     $rootScope.$on('CHANGE_TAB_INDEX', function (event, args) {
-      vm.selectedAnalyticsItem = CONFIG.analyticsItems[args.selectedAnalyticItemIndex];
-      vm.views = CONFIG.analyticsItems[args.selectedAnalyticItemIndex].views;
+      vm.selectedAnalyticsItem = configService.getConfig().analyticsItems[args.selectedAnalyticItemIndex];
+      vm.views = configService.getConfig().analyticsItems[args.selectedAnalyticItemIndex].views;
       vm.selectedView = vm.views[0];
       //Getting Query Json for this analytic Item
-      $http.get(CONFIG.analyticsItems[args.selectedAnalyticItemIndex].query_file).then(function (result) {
+      $http.get(configService.getConfig().analyticsItems[args.selectedAnalyticItemIndex].query_file).then(function (result) {
         analyticsQuery.setQuery(result.data);
         //Initialize
         requestAnalytics();
       });
     });
-
+    $rootScope.$on('propertyChanged',function(){
+      requestAnalytics();
+    });
 
     function checkDateValidity() {
       if (!(vm.startDate && vm.endDate))
@@ -65,7 +67,7 @@
 
       ANALYTICS_QUERY.queries.map(function (query) {
         query = angular.extend(query, ANALYTICS_QUERY.dates);
-        query = angular.extend(query, {"ids": CONFIG.propertyId})
+        query = angular.extend(query, {"ids": configService.getPropertyId().id})
       });
       vm.promise = $http({
         url: CONFIG.serverUrl + "get-meterics-dimensions",

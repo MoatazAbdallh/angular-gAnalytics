@@ -14,9 +14,9 @@
       </div>
       <div class="report-tools" flex="50" layout="row" layout-sm="column" layout-xs="column" layout-padding layout-wrap
            flex-xs="50" flex-offset-xs="20">
-        <md-datepicker ng-model="vm.startDate" md-min-date="vm.minDate" md-max-date="vm.maxDate"
+        <md-datepicker ng-model="vm.startDate" md-max-date="vm.maxDate"
                        md-placeholder="Start Date"></md-datepicker>
-        <md-datepicker ng-model="vm.endDate" md-max-date="vm.maxDate" md-placeholder="End Date"></md-datepicker>
+        <md-datepicker ng-model="vm.endDate" md-min-date="vm.startDate" md-max-date="vm.maxDate" md-placeholder="End Date"></md-datepicker>
         <md-input-container class="md-block">
           <md-select ng-model="vm.selectedView" placeholder="View">
             <md-option ng-repeat="view in vm.views" ng-value="view">

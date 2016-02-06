@@ -1,75 +1,26 @@
 {
-  "analyticsItems": [
+  "serverUrl": "http://localhost:8080/",
+  "propertiesId": [
     {
-      "id":"sessions-users",
-      "label": "Users/Sessions",
-      "url": "/analytics/sessions-users",
-      "state":"home.dynamic-analytics",
-      "views":["Grid","Chart"],
-      "query_file":"config/sessions-users-query.json"
-    },
-    {
-      "id":"geolocations",
-      "label": "Geolocations",
-      "url": "/analytics/gelocations",
-      "state":"home.dynamic-analytics",
-      "views":["Chart","Grid"],
-      "query_file":"config/geolocations-query.json"
-    },
-    {
-      "id":"devices",
-      "label": "Devices Info",
-      "url": "/analytics/devices",
-      "state":"home.dynamic-analytics",
-      "views":["Grid","Chart"],
-      "query_file":"config/devices-query.json"
-    },
-    {
-      "id": "reciters-sura",
-      "label": "Reciters / Sura",
-      "url": "/analytics/reciters-sura",
-      "state": "home.dynamic-analytics",
-      "views": [
-        "Grid",
-        "Chart"
-      ],
-      "query_file": "config/reciters-sura-query.json"
-    },
-    {
-      "id": "mushaf",
-      "label": "Mushaf",
-      "url": "/analytics/mushaf",
-      "state": "home.dynamic-analytics",
-      "views": [
-        "Grid",
-        "Chart"
-      ],
-      "query_file": "config/mushaf-query.json"
-    },
-    {
-      "id": "language",
-      "label": "Language Selection / TV Lang",
-      "url": "/analytics/language",
-      "state": "home.dynamic-analytics",
-      "views": [
-        "Grid",
-        "Chart"
-      ],
-      "query_file": "config/language-query.json"
-    },
-    {
-      "id": "bookmark",
-      "label": "Bookmark",
-      "url": "/analytics/bookmark",
-      "state": "home.dynamic-analytics",
-      "views": [
-        "Grid",
-        "Chart"
-      ],
-      "query_file": "config/bookmark-query.json"
+      "group": "Mp3Quran",
+      "items": [
+        {
+          "label": "Mp3Quran Samsung Tizen",
+          "id": "ga:113910487",
+          "group": "Mp3Quran"
+        },
+        {
+          "label": "Mp3Quran LG",
+          "id": "ga:113914836",
+          "group": "Mp3Quran"
+        },
+        {
+          "label": "Mp3Quran Samsung 2014",
+          "id": "ga:116049904",
+          "group": "Mp3Quran"
+        }
+      ]
     }
-
   ],
-  "serverUrl":"http://localhost:8080/",
-  "propertyId":"GOOGLE PROPERTY ID EX: ga:123456"
+  "selectedProperty": "mp3quran"
 }
