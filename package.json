@@ -24,7 +24,7 @@
     "nyc": "^5.5.0"
   },
   "scripts": {
-    "test": "mocha test/requests",
+    "test": "nyc tap test/requests",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   }
 }
