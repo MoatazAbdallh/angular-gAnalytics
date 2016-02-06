@@ -1,8 +1,9 @@
 # angular-gAnalytics
 
 [![Build Status via Travis CI](https://travis-ci.org/mo3taz-abdallh/angular-gAnalytics.svg?branch=server)](https://travis-ci.org/mo3taz-abdallh/angular-gAnalytics)
+[![Coverage Status](https://coveralls.io/repos/github/mo3taz-abdallh/angular-gAnalytics/badge.svg?branch=server)](https://coveralls.io/github/mo3taz-abdallh/angular-gAnalytics?branch=server)
+
 Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports &amp; dashboards with angularJS, NodeJS &amp; Google Charts.
-[![Coverage Status](https://coveralls.io/repos/github/mo3taz-abdallh/angular-gAnalytics/badge.svg?branch=master)](https://coveralls.io/github/mo3taz-abdallh/angular-gAnalytics?branch=master)
 
 # Server NodeJs Backend
 Follow these steps before deploying your server:
