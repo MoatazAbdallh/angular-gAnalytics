@@ -10,8 +10,6 @@
     "express": "^4.13.3",
     "file-stream-rotator": "*",
     "jsonwebtoken": "^5.0.4",
-    "mongodb": "^2.0.40",
-    "mongoose": "^4.1.2",
     "morgan": "^1.6.1",
     "q": "^1.4.1",
     "querystring": "^0.2.0",

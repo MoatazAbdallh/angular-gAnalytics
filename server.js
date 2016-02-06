@@ -5,7 +5,6 @@
   var morgan = require('morgan');
   var FileStreamRotator = require('file-stream-rotator');
   var fs = require('fs');
-  var mongoose = require('mongoose');
   var base64 = require('base-64');
   var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
   var config = require('./config'); // get our config file
@@ -22,7 +21,7 @@
       res.sendStatus(200);
     else
       next();
-  }
+  };
   var app = express();
   app.use(allowCrossDomain);
   app.use(bodyParser.urlencoded({extended: false}));
@@ -40,17 +39,6 @@
     verbose: false
   });
   app.use(morgan('combined', {stream: accessLogStream}));
-
-//Mongo DB
-//  mongoose.connect(config.database);
-//  var db = mongoose.connection;
-//  db.on('error', function (err) {
-//    logger().log("error", err);
-//  });
-//  db.once('open', function (callback) {
-//    logger().log("info", "Success Connection to DB");
-//  });
-
 
 // =======================
 // routes ================
