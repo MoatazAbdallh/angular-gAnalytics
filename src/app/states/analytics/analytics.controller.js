@@ -39,7 +39,7 @@
         requestAnalytics();
       });
     });
-    $rootScope.$on('propertyChanged',function(){
+    $rootScope.$on('propertyChanged', function () {
       requestAnalytics();
     });
 
@@ -110,6 +110,7 @@
           })
         );
       });
+      return vm.promise;
     }
 
     function drawChart() {

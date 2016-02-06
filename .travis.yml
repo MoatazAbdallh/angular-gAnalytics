@@ -1,14 +1,6 @@
 language: node_js
 node_js:
-  - "4.0"
   - "5.0"
 sudo: false
-
-before_script:
-  - cd server
-
-install:
-
-  - npm install
 
 after_success: npm run coveralls
