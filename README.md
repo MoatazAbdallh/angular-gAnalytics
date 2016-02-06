@@ -1,4 +1,5 @@
 # angular-gAnalytics
+[![Build Status via Travis CI](https://travis-ci.org/mo3taz-abdallh/angular-gAnalytics.svg?branch=master)
 Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports &amp; dashboards with angularJS, NodeJS &amp; Google Charts.
 
 # Server NodeJs Backend
