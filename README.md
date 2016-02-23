@@ -74,7 +74,7 @@ Follow these steps before using gulp serve:
 1.1. Change **serverUrl** to backend server url
 
 ```javascript
-'serverUrl': 'YOUR_BACKEND_SERVER_URL,
+'serverUrl': 'YOUR_BACKEND_SERVER_URL'
 ```
 
 1.2. Update group items change property name & property id, you could get your property id from [GA Query Explorer](https://ga-dev-tools.appspot.com/query-explorer/)
