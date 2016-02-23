@@ -1,5 +1,5 @@
 {
-  "name": "gAnalytics",
+  "name": "angular-ganalytics",
   "main": "server.js",
   "license": "MIT",
   "version": "1.0.0",

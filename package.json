@@ -1,5 +1,5 @@
 {
-  "name": "gAnalytics",
+  "name": "angular-ganalytics",
   "license": "MIT",
   "version": "1.0.0",
   "description": "Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports & dashboards with angularJS, NodeJS & Google Charts.",
