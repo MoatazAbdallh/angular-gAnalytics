@@ -1,0 +1,48 @@
+{
+  "analyticsItems": [
+    {
+      "id": "sessions-users",
+      "label": "Users/Sessions",
+      "url": "/analytics/sessions-users",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/group1/sessions-users-query.json"
+    },
+    {
+      "id": "geolocations",
+      "label": "Geolocations",
+      "url": "/analytics/gelocations",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Chart",
+        "Grid"
+      ],
+      "query_file": "config/queries/group1/geolocations-query.json"
+    },
+    {
+      "id": "devices",
+      "label": "Devices Info",
+      "url": "/analytics/devices",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/group1/devices-query.json"
+    },
+    {
+      "id": "language",
+      "label": "Language Selection",
+      "url": "/analytics/language",
+      "state": "home.dynamic-analytics",
+      "views": [
+        "Grid",
+        "Chart"
+      ],
+      "query_file": "config/queries/group1/language-query.json"
+    }
+  ]
+}

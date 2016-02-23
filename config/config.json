@@ -1,0 +1,26 @@
+{
+  "serverUrl": "http://glacial-savannah-5405.herokuapp.com/",
+  "propertiesId": [
+    {
+      "group": "Analytics",
+      "items": [
+        {
+          "label": "Property 1",
+          "id": "ga:113910487",
+          "group": "group1"
+        },
+        {
+          "label": "Property 2",
+          "id": "ga:113914836",
+          "group": "group1"
+        },
+        {
+          "label": "Property 3",
+          "id": "ga:116049904",
+          "group": "group1"
+        }
+      ]
+    }
+  ],
+  "selectedProperty": "group1"
+}
