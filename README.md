@@ -4,6 +4,9 @@
 
 Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports &amp; dashboards with angularJS, NodeJS &amp; Google Charts.
 
+# Demo
+[Demo](http://mo3taz-abdallh.github.io/angular-gAnalytics/)
+
 # Full setup
 1. Install [Node.js](http://nodejs.org/)
 2. Install [Gulp](http://gulpjs.com/)
