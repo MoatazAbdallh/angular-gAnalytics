@@ -1,12 +1,24 @@
 {
   "name": "gAnalytics",
-  "version": "0.0.0",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports & dashboards with angularJS, NodeJS & Google Charts.",
+  "author": {
+    "name": "Moataz Hammous",
+    "email": "moataz.abdallh@gmail.com",
+    "web": "https://twitter.com/MoatazAbdallh"
+  },
+  "keywords": ["angular","analytics","gAnalytics","Dynamic analytics"],
   "dependencies": {
     "gulp-if": "^2.0.0",
     "vinyl-ftp": "^0.4.5"
   },
   "scripts": {
     "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mo3taz-abdallh/angular-gAnalytics.git"
   },
   "devDependencies": {
     "browser-sync": "~2.9.2",

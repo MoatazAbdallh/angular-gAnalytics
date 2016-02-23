@@ -1,6 +1,19 @@
 {
   "name": "gAnalytics",
   "main": "server.js",
+  "license": "MIT",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mo3taz-abdallh/angular-gAnalytics.git"
+  },
+  "description": "Consuming Google Analytics Core Reporting Service (Server - Server) Auth to display Reports & dashboards with angularJS, NodeJS & Google Charts.",
+  "author": {
+    "name": "Moataz Hammous",
+    "email": "moataz.abdallh@gmail.com",
+    "web": "https://twitter.com/MoatazAbdallh"
+  },
+  "keywords": ["angular","analytics","gAnalytics","Dynamic analytics"],
   "dependencies": {
     "base-64": "^0.1.0",
     "body-parser": "^1.13.3",
